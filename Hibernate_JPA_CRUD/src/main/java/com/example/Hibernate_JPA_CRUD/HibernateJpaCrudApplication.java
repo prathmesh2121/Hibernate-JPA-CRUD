@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class HibernateJpaCrudApplication {
 
@@ -22,23 +24,56 @@ public class HibernateJpaCrudApplication {
         return runner -> {
             //createStudent(studentDAO);
             createMultipleStudent(studentDAO);
-
+            // readStudent(studentDAO);
+            //readAllStudent(studentDAO);
+            readByLastName(studentDAO);
         };
     }
+
+    private void readByLastName(StudentDAO studentDAO){
+        System.out.println("Reading student object by last name ...");
+
+        List<Student> theStudents = studentDAO.findByLastName();
+        System.out.println("Total result found : "+theStudents.size());
+
+        for(Student tempStudent : theStudents)
+        {
+            System.out.println(tempStudent);
+        }
+    }
+
+
+    private void readAllStudent(StudentDAO studentDAO)
+    {
+        System.out.println("Reading all student object ...");
+
+        List<Student> theStudents = studentDAO.findAll();
+        for(Student tempStudent : theStudents)
+        {
+            System.out.println(tempStudent);
+        }
+    }
+
+    private void readStudent(StudentDAO studentDAO)
+    {
+        System.out.println("Reading student object ...");
+        int theId = 1;
+
+        Student tempStudent = studentDAO.findById(theId);
+        System.out.println("Student found : "+tempStudent);
+    }
+
 
     private void createMultipleStudent(StudentDAO studentDAO)
     {
         System.out.println("Creating new student objects ...");
 
-        Student tempStudent1 = new Student("Mayur", "Kumbhar", "mayur.kumbhar@tcs.com");
-        Student tempStudent2 = new Student("Surbhi", "Marathe", "surbhi.marathe@forvia.com");
-        Student tempStudent3 = new Student("Tejas", "Ghate", "tejas.ghate@hsbc.com");
+        Student tempStudent1 = new Student("Hemant", "Patil", "hemant.patil@infosys.com");
+        Student tempStudent2 = new Student("Akshay", "Patil", "akshay.patil@tox.com");
         studentDAO.save(tempStudent1);
         studentDAO.save(tempStudent2);
-        studentDAO.save(tempStudent3);
         System.out.println(tempStudent1.getFirst_name()+" "+
-                           tempStudent2.getFirst_name()+" "+
-                           tempStudent3.getFirst_name()+" "+"Saved student objects ...");
+                           tempStudent2.getFirst_name()+" "+"Saved student objects ...");
 
 
     }
