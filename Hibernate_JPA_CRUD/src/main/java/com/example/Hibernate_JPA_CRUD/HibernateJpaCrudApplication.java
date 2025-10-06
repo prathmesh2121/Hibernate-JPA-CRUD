@@ -23,17 +23,32 @@ public class HibernateJpaCrudApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
             //createStudent(studentDAO);
-            createMultipleStudent(studentDAO);
+            //createMultipleStudent(studentDAO);
             // readStudent(studentDAO);
             //readAllStudent(studentDAO);
-            readByLastName(studentDAO);
+            //readByLastName(studentDAO);
+            updateStudent(studentDAO);
         };
     }
+
+    private void updateStudent(StudentDAO studentDAO)
+    {
+        System.out.println("Updating student object ...");
+        int theId = 4;
+
+        Student theStudent =  studentDAO.findById(theId);
+        System.out.println("Before update : "+theStudent);
+
+        theStudent.setLast_name("Pawar");
+        studentDAO.update(theStudent);
+        System.out.println("After update : "+theStudent);
+    }
+
 
     private void readByLastName(StudentDAO studentDAO){
         System.out.println("Reading student object by last name ...");
 
-        List<Student> theStudents = studentDAO.findByLastName();
+        List<Student> theStudents = studentDAO.findByLastName("Patil");
         System.out.println("Total result found : "+theStudents.size());
 
         for(Student tempStudent : theStudents)

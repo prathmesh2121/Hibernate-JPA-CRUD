@@ -43,10 +43,20 @@ public class StudentDAOImpl implements StudentDAO
     }
 
     @Override
-    public List<Student> findByLastName() {
-        TypedQuery<Student> theQuery = entityManager.createQuery("from Student where last_name = :lname", Student.class);
-        theQuery.setParameter("lname","Patil");
+    public List<Student> findByLastName(String theLastName) {
+
+        TypedQuery<Student> theQuery = entityManager.createQuery("from Student where last_name = :lname order by first_name", Student.class);
+        theQuery.setParameter("lname",theLastName);
         List<Student> studentResult = theQuery.getResultList();
         return studentResult;
+    }
+
+    @Override
+    @Transactional
+    public void update(Student theStudent)
+    {
+        entityManager.merge(theStudent); //merge for update
+
+
     }
 }
