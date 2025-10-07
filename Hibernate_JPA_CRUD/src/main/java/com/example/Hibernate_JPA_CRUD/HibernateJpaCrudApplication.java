@@ -23,12 +23,35 @@ public class HibernateJpaCrudApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
             //createStudent(studentDAO);
-            //createMultipleStudent(studentDAO);
+            createMultipleStudent(studentDAO);
             // readStudent(studentDAO);
             //readAllStudent(studentDAO);
             //readByLastName(studentDAO);
-            updateStudent(studentDAO);
+            //updateStudent(studentDAO);
+            //deleteStudent(studentDAO);
+            //deleteAllStudent(studentDAO);
         };
+    }
+
+    private void deleteAllStudent(StudentDAO studentDAO)
+    {
+        System.out.println("Deleting all student object ...");
+        int numRowsDeleted = studentDAO.deleteAll();
+        System.out.println("Total rows deleted : "+numRowsDeleted);
+    }
+
+    private void deleteStudent(StudentDAO studentDAO)
+    {
+        int theId = 3;
+        System.out.println("Before deletion ...");
+        readAllStudent(studentDAO);
+
+        System.out.println("ID = "+theId+" Deleting student object ...");
+        studentDAO.delete(theId);
+
+        System.out.println("After deletion ...");
+        readAllStudent(studentDAO);
+
     }
 
     private void updateStudent(StudentDAO studentDAO)
