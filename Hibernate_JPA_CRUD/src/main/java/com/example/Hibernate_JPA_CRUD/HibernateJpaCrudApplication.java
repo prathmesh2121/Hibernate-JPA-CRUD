@@ -2,6 +2,7 @@ package com.example.Hibernate_JPA_CRUD;
 
 import com.example.Hibernate_JPA_CRUD.dao.StudentDAO;
 import com.example.Hibernate_JPA_CRUD.entity.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -102,8 +103,15 @@ public class HibernateJpaCrudApplication {
     }
 
 
+//    @Autowired
+//    Student s1;
+
     private void createMultipleStudent(StudentDAO studentDAO)
     {
+
+
+
+
         System.out.println("Creating new student objects ...");
 
         Student tempStudent1 = new Student("Hemant", "Patil", "hemant.patil@infosys.com");

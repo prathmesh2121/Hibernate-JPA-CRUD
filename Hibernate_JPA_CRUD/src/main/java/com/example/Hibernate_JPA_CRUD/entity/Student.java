@@ -1,11 +1,25 @@
 package com.example.Hibernate_JPA_CRUD.entity;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "student")
+@Component
 public class Student
 {
+
+    @PostConstruct
+    public void loadMsg()
+    {
+        System.out.println("In post construct method of Student class");
+    }
+
+
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -21,6 +35,7 @@ public class Student
     private String email;
 
     public Student() {
+        System.out.println("In default constructor of Student class");
     }
 
     public Student(String first_name, String last_name, String email) {
